@@ -59,11 +59,19 @@
         }
         .nav-card:hover { transform: translateY(-12px); border-color: var(--ocean-blue); }
         .nav-card h2 { font-size: 34px; font-weight: 900; }
+        
+        /* NEW ICON STYLING */
+        .nav-card img { width: 90px; margin-bottom: 25px; }
 
         .back-btn { background: var(--deep-navy); color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: 800; margin-bottom: 30px; }
 
         .resource-item { background: white; padding: 20px; margin: 10px 0; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
         .download-link { background: var(--vivid-orange); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 800; }
+
+        /* PROGRESS DASHBOARD SIMULATION */
+        .progress-box { background: white; padding: 30px; border-radius: 20px; text-align: left; }
+        .progress-bar { height: 20px; background: #ddd; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; border-radius: 10px; }
 
         /* --- SMART CHATBOX --- */
         .chat-bubble {
@@ -84,7 +92,7 @@
 <body>
 
 <div class="announcement-bar" id="top-announcement">
-    <div class="scrolling-text">📢 LATEST: 2026 Model Papers and ER Diagram Lessons are now available for A/L Students!</div>
+    <div class="scrolling-text">📢 LATEST: 2026 A/L ICT Model Papers and ER Diagram Lessons are now live in the Exam Library!</div>
 </div>
 
 <img src="smurf1.png" id="bg1" class="smurf-bg">
@@ -116,9 +124,9 @@
         <button class="back-btn" onclick="showStep('step-year')">← BACK</button>
         <h1 id="type-title">Categories</h1>
         <div class="btn-grid">
-            <div class="nav-card" onclick="showFiles('Past Papers')"><h2>Past Papers</h2></div>
-            <div class="nav-card" onclick="showFiles('Model Papers')"><h2>Model Papers</h2></div>
-            <div class="nav-card" onclick="showFiles('Progress')"><h2>Progress</h2></div>
+            <div class="nav-card" onclick="showFiles('Past Papers')"><img src="past paper.png" alt="Past Papers"><h2>Past Papers</h2></div>
+            <div class="nav-card" onclick="showFiles('Model Papers')"><img src="model paper.png" alt="Model Papers"><h2>Model Papers</h2></div>
+            <div class="nav-card" onclick="showFiles('Progress')"><img src="progress report.png" alt="Progress"><h2>Progress</h2></div>
         </div>
     </div>
 
@@ -177,7 +185,18 @@
             } else if(type === "Model Papers") {
                 list.innerHTML += `<div class="resource-item"><span>March Model Paper</span><a href="model paper.pdf" target="_blank" class="download-link">VIEW</a></div>`;
                 list.innerHTML += `<div class="resource-item"><span>ER Diagram Lesson</span><a href="er model paper.pdf" target="_blank" class="download-link">VIEW</a></div>`;
-            } else { list.innerHTML = "<h3>Status: ELITE ACTIVE</h3>"; }
+            } else { 
+                // PROGRESS DASHBOARD SIMULATION
+                list.innerHTML = `
+                    <div class="progress-box">
+                        <h3>Status: <b style="color: green;">ELITE</b></h3>
+                        <p>Evaluate your target standing for key ICT topics.</p>
+                        <p>Database Systems (A/L):</p><div class="progress-bar"><div class="progress-fill" style="width: 85%; background: green;"></div></div>
+                        <p>Networking (A/L):</p><div class="progress-bar"><div class="progress-fill" style="width: 90%; background: green;"></div></div>
+                        <p>ER Diagram Specialist:</p><div class="progress-bar"><div class="progress-fill" style="width: 70%; background: orange;"></div></div>
+                    </div>
+                `;
+            }
         } else { list.innerHTML = "<h3>Coming Soon for " + currentY + "</h3>"; }
         showStep('step-files');
     }
@@ -197,7 +216,7 @@
         
         let response = "I'm not sure about that. Try asking about 'Papers' or 'Syllabus'!";
         if(text.includes("paper")) response = "You can find Past Papers (2011-2015) and Model Papers in the A/L 2026 section of this portal!";
-        if(text.includes("er") || text.includes("diagram")) response = "The ER Diagram model paper is available under 'Model Papers' for A/L 2026.";
+        if(text.includes("er") || text.includes("diagram")) response = "The ER Diagram lesson is available under 'Model Papers' for A/L 2026.";
         if(text.includes("syllabus")) response = "The 2026 ICT Syllabus focuses heavily on Database Systems and Networking. Check the model papers for practice!";
 
         setTimeout(() => {
