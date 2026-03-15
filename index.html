@@ -130,6 +130,202 @@
         document.getElementById(pageId).classList.add('active');
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
+ <div id="ai-chat" style="position:fixed; bottom:20px; right:20px; width:300px; background:white; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.2); display:none;">
+    <div style="background:var(--ocean-blue); color:white; padding:10px; border-radius:15px 15px 0 0;">ICT AI Assistant</div>
+    <div id="chat-content" style="height:200px; padding:10px; overflow-y:auto; font-size:14px;">
+        Hello! Ask me anything about the ICT syllabus.
+    </div>
+    <input type="text" placeholder="Type here..." style="width:100%; border:none; padding:10px; border-top:1px solid #eee;">
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT ELITE | Student Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light-blue: #E3F2FD;
+            --ocean-blue: #0096FF;
+            --vivid-orange: #FF9800;
+            --deep-navy: #012a4a;
+        }
+
+        /* LOGIN OVERLAY */
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--deep-navy); z-index: 2000;
+            display: flex; justify-content: center; align-items: center;
+            color: white; text-align: center;
+        }
+        .login-box {
+            background: white; color: var(--deep-navy);
+            padding: 40px; border-radius: 30px; width: 90%; max-width: 400px;
+        }
+        .login-input {
+            width: 100%; padding: 15px; margin: 15px 0;
+            border: 2px solid var(--light-blue); border-radius: 10px; font-size: 16px;
+        }
+        .login-btn {
+            background: var(--vivid-orange); color: white; width: 100%;
+            padding: 15px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer;
+        }
+
+        /* CHAT BOX */
+        #chat-widget {
+            position: fixed; bottom: 20px; right: 20px; width: 300px;
+            background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; overflow: hidden; z-index: 1500;
+        }
+        .chat-header { background: var(--ocean-blue); color: white; padding: 15px; font-weight: 700; display: flex; justify-content: space-between; }
+        #chat-logs { height: 250px; padding: 15px; overflow-y: auto; background: #f9f9f9; font-size: 14px; }
+        .chat-input-area { display: flex; border-top: 1px solid #eee; }
+        #user-query { border: none; padding: 15px; flex: 1; outline: none; }
+        
+        .chat-bubble-btn {
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
+            background: var(--vivid-orange); border-radius: 50%; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 1400;
+        }
+
+        /* EXISTING STYLES */
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: #f4f9ff; overflow-x: hidden; }
+        .smurf-bg { position: fixed; width: 250px; z-index: -1; animation: float 6s infinite ease-in-out; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+        header { background: rgba(255, 255, 255, 0.96); padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid var(--vivid-orange); position: sticky; top: 0; z-index: 1000; }
+        .logo-text { font-size: 32px; font-weight: 800; color: var(--ocean-blue); }
+        .container { padding: 30px 8%; min-height: 80vh; display: none; } /* Hidden until login */
+        .page { display: none; animation: slideUp 0.6s both; }
+        .active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: white; padding: 40px; border-radius: 30px; text-align: center; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .card img { width: 100px; margin-bottom: 15px; }
+        .paper-item { background: white; padding: 15px; margin-bottom: 10px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .download-btn { background: var(--vivid-orange); color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: 700; }
+        footer { background: var(--deep-navy); color: white; padding: 40px; text-align: center; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<div id="login-overlay">
+    <div class="login-box">
+        <h2 style="color:var(--ocean-blue)">STUDENT ACCESS</h2>
+        <p>Enter your Student ID to access the Portal</p>
+        <input type="password" id="student-id" class="login-input" placeholder="Enter ID (Try 2026)">
+        <button class="login-btn" onclick="checkLogin()">LOGIN NOW</button>
+        <p id="login-error" style="color:red; display:none; margin-top:10px;">Invalid Student ID!</p>
+    </div>
+</div>
+
+<div class="chat-bubble-btn" onclick="toggleChat()">
+    <img src="https://cdn-icons-png.flaticon.com/512/8943/8943377.png" width="30">
+</div>
+
+<div id="chat-widget">
+    <div class="chat-header">
+        <span>Syllabus AI Assistant</span>
+        <span onclick="toggleChat()" style="cursor:pointer">×</span>
+    </div>
+    <div id="chat-logs">
+        <p><b>AI:</b> Hello! I am trained on your ICT Syllabus. Ask me about Networking, Hardware, or Programming.</p>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="user-query" placeholder="Ask a question...">
+        <button onclick="askAI()" style="background:var(--ocean-blue); color:white; border:none; padding:10px;">Send</button>
+    </div>
+</div>
+
+<img src="smufs1.png" class="smurf-bg" style="top:15%; left:2%;">
+<img src="smurf2.png" class="smurf-bg" style="bottom:10%; right:2%;">
+
+<header>
+    <div class="logo-text">ICT <span style="color:var(--vivid-orange)">ELITE</span></div>
+    <button onclick="logout()" style="border:none; background:none; cursor:pointer; font-weight:bold;">LOGOUT</button>
+</header>
+
+<div class="container" id="main-content">
+    <div id="home" class="page active">
+        <div class="grid">
+            <div class="card" onclick="showPage('past-papers')">
+                <img src="past paper.png">
+                <h3>Past Papers</h3>
+            </div>
+            <div class="card" onclick="showPage('model-papers')">
+                <img src="model paper.png">
+                <h3>Model Papers</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="past-papers" class="page">
+        <button onclick="showPage('home')" style="margin-bottom:20px;">← Back</button>
+        <h2>A/L Past Papers</h2>
+        <div class="paper-item"><span>2015 ICT English Medium</span><a href="2015.pdf" target="_blank" class="download-btn">View</a></div>
+        <div class="paper-item"><span>2014 ICT English Medium</span><a href="2014.pdf" target="_blank" class="download-btn">View</a></div>
+        <div class="paper-item"><span>2013 ICT English Medium</span><a href="2013.pdf" target="_blank" class="download-btn">View</a></div>
+    </div>
+
+    <div id="model-papers" class="page">
+        <button onclick="showPage('home')" style="margin-bottom:20px;">← Back</button>
+        <h2>2026 Model Papers</h2>
+        <div class="paper-item"><span>March 1st Week Model Paper</span><a href="model paper.pdf" target="_blank" class="download-btn">View</a></div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 ICT ELITE | Designed for Education</p>
+</footer>
+
+<script>
+    // LOGIN LOGIC
+    function checkLogin() {
+        const id = document.getElementById('student-id').value;
+        if(id === "2026") {
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        } else {
+            document.getElementById('login-error').style.display = 'block';
+        }
+    }
+
+    function logout() { location.reload(); }
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    // AI CHAT LOGIC (Simulated for Syllabus)
+    function toggleChat() {
+        const chat = document.getElementById('chat-widget');
+        chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function askAI() {
+        const input = document.getElementById('user-query');
+        const logs = document.getElementById('chat-logs');
+        if(input.value.trim() === "") return;
+
+        logs.innerHTML += `<p style="text-align:right"><b>You:</b> ${input.value}</p>`;
+        
+        // Simple "Syllabus" logic for the presentation
+        let response = "I'm checking the ICT syllabus for that... Please refer to Chapter 4 on Networking.";
+        if(input.value.toLowerCase().includes("networking")) response = "Networking involves connecting computers to share resources. Key components include Routers, Switches, and NICs.";
+        if(input.value.toLowerCase().includes("pdf")) response = "You can find all relevant PDFs in the 'Past Papers' section of this portal.";
+
+        setTimeout(() => {
+            logs.innerHTML += `<p><b>AI:</b> ${response}</p>`;
+            logs.scrollTop = logs.scrollHeight;
+        }, 1000);
+        
+        input.value = "";
+    }
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
