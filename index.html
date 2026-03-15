@@ -13,7 +13,7 @@
             --deep-navy: #012a4a;
         }
 
-        /* --- LOGIN PAGE (LIGHT BLUE & ORANGE) --- */
+        /* --- EYE-CATCHING LOGIN PAGE --- */
         #login-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--light-blue); z-index: 2000;
@@ -21,194 +21,173 @@
             color: var(--deep-navy); text-align: center;
         }
         
+        .big-brand {
+            font-size: 72px; /* Huge text */
+            font-weight: 900;
+            color: var(--ocean-blue);
+            margin: 0;
+            text-shadow: 4px 4px 0px var(--vivid-orange);
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+        }
+
         .login-smurf {
-            width: 350px; /* Large Smurf for Login */
-            margin-bottom: -40px; /* Pulls the box closer to the image */
+            width: 380px; /* Big Smurf */
             z-index: 2001;
             animation: float 5s infinite ease-in-out;
+            margin-bottom: -30px;
         }
 
         .login-box {
-            background: white; color: var(--deep-navy);
-            padding: 40px; border-radius: 30px; width: 90%; max-width: 400px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            border: 4px solid var(--vivid-orange); /* Orange Border */
+            background: rgba(255, 255, 255, 0.9); /* Glass effect */
+            backdrop-filter: blur(10px);
+            padding: 40px; border-radius: 40px; width: 90%; max-width: 450px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            border: 5px solid white;
             position: relative;
         }
 
         .login-input {
-            width: 100%; padding: 15px; margin: 10px 0;
-            border: 2px solid var(--light-blue); border-radius: 10px; font-size: 16px; outline: none;
+            width: 100%; padding: 18px; margin: 12px 0;
+            border: 2px solid #ddd; border-radius: 15px; font-size: 16px; outline: none;
         }
 
         .login-btn {
             background: var(--vivid-orange); color: white; width: 100%;
-            padding: 15px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 18px;
-            margin-top: 15px;
+            padding: 18px; border: none; border-radius: 15px; font-weight: 800; cursor: pointer; font-size: 20px;
+            margin-top: 10px; box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
         }
 
-        /* --- AI CHATBOX STYLES --- */
-        #chat-widget {
-            position: fixed; bottom: 95px; right: 20px; width: 320px;
-            background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            display: none; flex-direction: column; overflow: hidden; z-index: 1500;
-        }
-        .chat-header { background: var(--ocean-blue); color: white; padding: 15px; font-weight: 700; display: flex; justify-content: space-between; }
-        #chat-logs { height: 280px; padding: 15px; overflow-y: auto; background: #f9f9f9; font-size: 14px; }
-        .chat-bubble-btn {
-            position: fixed; bottom: 20px; right: 20px; width: 65px; height: 65px;
-            background: var(--vivid-orange); border-radius: 50%; cursor: pointer;
-            display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1400;
-        }
-
-        /* --- DASHBOARD IMAGES (LARGER) --- */
-        .smurf-bg { 
-            position: fixed; 
-            width: 380px; /* Increased Size for Dashboard */
-            z-index: -1; 
-            animation: float 6s infinite ease-in-out; 
-            opacity: 0.9; 
-        }
-
+        /* --- DASHBOARD STYLES --- */
+        .smurf-bg { position: fixed; width: 400px; z-index: -1; animation: float 6s infinite ease-in-out; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
 
-        /* --- PAGE BASICS --- */
         * { box-sizing: border-box; transition: all 0.3s ease; }
-        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: #f4f9ff; overflow-x: hidden; }
-        header { background: rgba(255, 255, 255, 0.96); padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid var(--vivid-orange); position: sticky; top: 0; z-index: 1000; }
-        .logo-text { font-size: 28px; font-weight: 800; color: var(--ocean-blue); }
-        .container { padding: 30px 8%; min-height: 80vh; display: none; }
-        .page { display: none; animation: slideUp 0.6s both; }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background-color: #f4f9ff; }
+        header { background: white; padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid var(--vivid-orange); position: sticky; top: 0; z-index: 1000; }
+        .container { padding: 30px 8%; display: none; }
+        .page { display: none; animation: fadeIn 0.8s ease; }
         .active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 20px; }
-        .card { background: white; padding: 40px; border-radius: 30px; text-align: center; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .card:hover { transform: translateY(-10px); }
-        .paper-item { background: white; padding: 20px; margin-bottom: 12px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .download-btn { background: var(--vivid-orange); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; }
-        footer { background: var(--deep-navy); color: white; padding: 40px 8%; text-align: center; margin-top: 50px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: white; padding: 40px; border-radius: 30px; text-align: center; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .card img { width: 100px; margin-bottom: 20px; }
+
+        /* --- AI CHATBOX --- */
+        #chat-widget { position: fixed; bottom: 100px; right: 20px; width: 320px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; z-index: 1500; }
+        .chat-header { background: var(--ocean-blue); color: white; padding: 15px; font-weight: 700; display: flex; justify-content: space-between; }
+        .chat-bubble-btn { position: fixed; bottom: 20px; right: 20px; width: 70px; height: 70px; background: var(--vivid-orange); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 1400; }
+
+        footer { background: var(--deep-navy); color: white; padding: 40px; text-align: center; margin-top: 60px; }
     </style>
 </head>
 <body>
 
 <div id="login-overlay">
-    <img src="smurf3.png" class="login-smurf" alt="Portal Guardian">
+    <h1 class="big-brand">ICT ELITE</h1>
+    <img src="smurf3.png" class="login-smurf">
     <div class="login-box">
-        <h1 style="margin:0; color:var(--ocean-blue);">ICT ELITE</h1>
-        <p style="margin-bottom:20px; font-weight: bold;">Enter Credentials to Enter</p>
-        <input type="text" id="student-name-input" class="login-input" placeholder="Student Name">
-        <input type="password" id="student-password-input" class="login-input" placeholder="Password">
-        <button class="login-btn" onclick="checkLogin()">UNLOCK PORTAL</button>
-        <p id="login-error" style="color:red; display:none; margin-top:15px; font-weight:bold;">❌ Invalid Access</p>
+        <p style="font-weight: 800; font-size: 18px; margin-bottom: 20px;">STUDENT LOGIN</p>
+        <input type="text" id="name-in" class="login-input" placeholder="Your Name">
+        <input type="password" id="pass-in" class="login-input" placeholder="Choose a Password">
+        <button class="login-btn" onclick="openPortal()">ACCESS PORTAL</button>
+    </div>
+</div>
+
+<img src="smurf1.png" class="smurf-bg" style="top:10%; left:-100px;">
+<img src="smuef2.png" class="smurf-bg" style="bottom:5%; right:-100px;">
+
+<header>
+    <div style="font-size: 24px; font-weight: 800; color: var(--ocean-blue);">ICT <span style="color:var(--vivid-orange)">ELITE</span></div>
+    <div>
+        <span id="user-display" style="font-weight: bold; margin-right: 15px;"></span>
+        <button onclick="location.reload()" style="cursor:pointer; border:1px solid #ddd; background:none; padding:5px 10px; border-radius:8px;">Logout</button>
+    </div>
+</header>
+
+<div class="container" id="portal-content">
+    <div id="home" class="page active">
+        <div style="text-align:center; padding:50px 0;">
+            <h1 style="font-size:48px;">Welcome to the <span style="color:var(--vivid-orange)">Future</span></h1>
+            <p>Your journey to ICT excellence begins here.</p>
+        </div>
+        <div class="grid">
+            <div class="card" onclick="showPage('papers')">
+                <img src="past paper.png">
+                <h3>Exam Library</h3>
+                <p>Download Past & Model Papers</p>
+            </div>
+            <div class="card" onclick="showPage('results')">
+                <img src="progress report.png">
+                <h3>My Analytics</h3>
+                <p>View your grading and rank</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="papers" class="page">
+        <button onclick="showPage('home')" style="cursor:pointer; margin-bottom:20px;">← Back</button>
+        <h2>Syllabus Resource Library</h2>
+        <div style="background:white; padding:20px; border-radius:20px;">
+            <p>2015 ICT Paper <a href="2015.pdf" style="float:right; color:var(--vivid-orange); font-weight:bold;">Download</a></p>
+            <hr>
+            <p>2026 Model Paper <a href="model paper.pdf" style="float:right; color:var(--vivid-orange); font-weight:bold;">Download</a></p>
+        </div>
     </div>
 </div>
 
 <div class="chat-bubble-btn" onclick="toggleChat()">
     <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" width="35">
 </div>
-
 <div id="chat-widget">
-    <div class="chat-header">
-        <span>Syllabus Assistant</span>
-        <span onclick="toggleChat()" style="cursor:pointer;">&times;</span>
+    <div class="chat-header"><span>ICT Assistant</span><span onclick="toggleChat()" style="cursor:pointer">×</span></div>
+    <div id="logs" style="height:250px; padding:15px; overflow-y:auto; font-size:14px; background:#f9f9f9;">
+        <p><b>AI:</b> Welcome! Type any ICT question.</p>
     </div>
-    <div id="chat-logs">
-        <p><b>AI:</b> Hello! Ask me about Networking or HTML.</p>
-    </div>
-    <div class="chat-input-area">
-        <input type="text" id="user-query" placeholder="Ask...">
-        <button onclick="askAI()" style="background:var(--ocean-blue); color:white; border:none; padding:15px;">GO</button>
-    </div>
-</div>
-
-<img src="smurf1.png" class="smurf-bg" style="top:15%; left:-50px; animation-delay: 0s;">
-<img src="smuef2.png" class="smurf-bg" style="bottom:10%; right:-50px; animation-delay: 2s;">
-
-<header>
-    <div class="logo-text">ICT <span style="color:var(--vivid-orange)">ELITE</span></div>
-    <div style="display:flex; align-items:center; gap:20px;">
-        <span id="display-student-name" style="font-weight:600; color:var(--deep-navy)">Guest</span>
-        <button onclick="logout()" style="cursor:pointer; border:1px solid #ccc; background:none; border-radius:5px; padding:5px 10px;">Logout</button>
-    </div>
-</header>
-
-<div class="container" id="main-content">
-    <div id="home" class="page active">
-        <div style="text-align:center; padding:40px 0;">
-            <h1 style="font-size:42px;">Access Your <span style="color:var(--vivid-orange)">Success</span></h1>
-            <p>Welcome to the Elite 2026 Student Portal.</p>
-        </div>
-        <div class="grid">
-            <div class="card" onclick="showPage('papers')">
-                <img src="past paper.png" width="90">
-                <h3>Exam Papers</h3>
-                <p>2011 - 2026</p>
-            </div>
-            <div class="card" onclick="showPage('progress')">
-                <img src="progress report.png" width="90">
-                <h3>My Progress</h3>
-                <p>Track your score</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="papers" class="page">
-        <button onclick="showPage('home')" style="cursor:pointer; margin-bottom: 20px;">← Back</button>
-        <h2>Available Papers</h2>
-        <div class="paper-item"><span>2015 ICT Paper</span><a href="2015.pdf" target="_blank" class="download-btn">View</a></div>
-        <div class="paper-item"><span>2014 ICT Paper</span><a href="2014.pdf" target="_blank" class="download-btn">View</a></div>
-        <div class="paper-item"><span>2026 Model Paper</span><a href="model paper.pdf" target="_blank" class="download-btn">View</a></div>
-    </div>
-
-    <div id="progress" class="page">
-        <button onclick="showPage('home')" style="cursor:pointer; margin-bottom: 20px;">← Back</button>
-        <h2>Student Stats</h2>
-        <div style="background:white; padding:20px; border-radius:15px;">
-            <p>Performance: <span style="color:green; font-weight:bold;">Excellent</span></p>
-        </div>
+    <div style="display:flex; border-top:1px solid #eee;">
+        <input type="text" id="ai-q" style="flex:1; border:none; padding:15px; outline:none;" placeholder="Ask me...">
+        <button onclick="sendAI()" style="background:var(--ocean-blue); color:white; border:none; padding:15px;">Ask</button>
     </div>
 </div>
 
 <footer>
-    <p>© 2026 ICT ELITE | Negombo, Sri Lanka</p>
-    <p>Hotline: 0779178732</p>
+    <p><b>ICT ELITE 2026</b></p>
+    <p>Negombo Ave Maria Convent Project</p>
 </footer>
 
 <script>
-    function checkLogin() {
-        const name = document.getElementById('student-name-input').value;
-        const pass = document.getElementById('student-password-input').value;
-
-        if(name === "Student" && pass === "ICT2026") {
+    function openPortal() {
+        const name = document.getElementById('name-in').value;
+        const pass = document.getElementById('pass-in').value;
+        
+        if(name.trim() !== "" && pass.trim() !== "") {
             document.getElementById('login-overlay').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            document.getElementById('display-student-name').innerText = name;
+            document.getElementById('portal-content').style.display = 'block';
+            document.getElementById('user-display').innerText = "Hello, " + name + "!";
         } else {
-            document.getElementById('login-error').style.display = 'block';
+            alert("Please enter both your Name and a Password!");
         }
     }
-
-    function logout() { location.reload(); }
 
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        window.scrollTo(0,0);
     }
 
     function toggleChat() {
-        const cw = document.getElementById('chat-widget');
-        cw.style.display = (cw.style.display === 'flex') ? 'none' : 'flex';
+        const c = document.getElementById('chat-widget');
+        c.style.display = (c.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    function askAI() {
-        const q = document.getElementById('user-query');
-        const logs = document.getElementById('chat-logs');
+    function sendAI() {
+        const q = document.getElementById('ai-q');
+        const l = document.getElementById('logs');
         if(!q.value) return;
-        logs.innerHTML += `<p style="text-align:right"><b>Me:</b> ${q.value}</p>`;
+        l.innerHTML += `<p style="text-align:right"><b>Me:</b> ${q.value}</p>`;
         setTimeout(() => {
-            logs.innerHTML += `<p><b>AI:</b> I've noted your question. Please refer to the 2026 syllabus for more details.</p>`;
-            logs.scrollTop = logs.scrollHeight;
+            l.innerHTML += `<p><b>AI:</b> I am analyzing your request based on the 2026 ICT Syllabus. Please check the 'Exam Library' for the answer.</p>`;
+            l.scrollTop = l.scrollHeight;
         }, 800);
         q.value = "";
     }
