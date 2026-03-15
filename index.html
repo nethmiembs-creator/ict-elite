@@ -13,112 +13,89 @@
             --deep-navy: #012a4a;
         }
 
-        /* --- NON-CONTACT CREATIVE BACKGROUND --- */
+        /* --- NON-CONTACT BACKGROUND --- */
         .smurf-bg { 
             position: fixed; 
-            width: 320px; 
+            width: 300px; 
             z-index: -1; 
             animation: float 8s infinite ease-in-out; 
-            opacity: 0.8; 
+            opacity: 0.85; 
             pointer-events: none;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
         }
-        #bg1 { top: 5%; left: 3%; }
-        #bg2 { top: 40%; right: 4%; animation-delay: 2s; }
-        #bg3 { bottom: 5%; left: 15%; animation-delay: 4s; }
+        #bg1 { top: 5%; left: 2%; }
+        #bg2 { top: 40%; right: 3%; animation-delay: 2s; }
+        #bg3 { bottom: 8%; left: 12%; animation-delay: 4s; }
 
-        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(2deg); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
 
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
         body { font-family: 'Outfit', sans-serif; margin: 0; background-color: var(--light-blue); overflow-x: hidden; color: var(--deep-navy); }
 
-        /* --- DYNAMIC ANNOUNCEMENT BAR (Initially Hidden) --- */
+        /* --- ANNOUNCEMENT BAR (Hidden on Home) --- */
         .announcement-bar {
-            background: linear-gradient(90deg, var(--vivid-orange), #ffb74d);
-            color: white;
-            padding: 12px 0;
-            font-weight: 800;
-            text-align: center;
-            overflow: hidden;
-            display: none; /* Hidden by default */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: var(--vivid-orange); color: white; padding: 12px 0; font-weight: 800;
+            text-align: center; overflow: hidden; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .scrolling-text { display: inline-block; white-space: nowrap; animation: scroll 20s linear infinite; }
         @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
-        /* --- COOL BOLD HEADER --- */
+        /* --- BOLD POPPING HEADER --- */
         header { 
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
-            padding: 20px 8%; display: flex; justify-content: center; align-items: center; 
-            border-bottom: 4px solid var(--vivid-orange); position: sticky; top: 0; z-index: 1000;
+            background: rgba(255, 255, 255, 0.95); padding: 25px 8%; display: flex; justify-content: center; 
+            border-bottom: 5px solid var(--vivid-orange); position: sticky; top: 0; z-index: 1000;
         }
-
-        /* POPPING LOGO STYLE */
-        .logo-main {
-            font-size: 42px; font-weight: 900; letter-spacing: -1px;
-            text-transform: uppercase; color: var(--ocean-blue);
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
-        }
+        .logo-main { font-size: 46px; font-weight: 900; color: var(--ocean-blue); text-transform: uppercase; }
         .logo-main span { color: var(--vivid-orange); }
 
         .container { padding: 40px 8%; min-height: 75vh; text-align: center; }
-        .view { display: none; animation: popIn 0.5s ease; }
+        .view { display: none; animation: fadeIn 0.5s ease; }
         .active { display: block; }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
-        /* CREATIVE CARDS */
         .btn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
         .nav-card {
             background: white; padding: 50px 30px; border-radius: 40px; cursor: pointer;
             box-shadow: 0 15px 35px rgba(0,0,0,0.05); border: 4px solid transparent;
         }
-        .nav-card:hover { transform: translateY(-15px); border-color: var(--ocean-blue); }
-        .nav-card h2 { font-size: 36px; margin: 0; font-weight: 900; }
-        .nav-card img { width: 90px; margin-bottom: 20px; }
+        .nav-card:hover { transform: translateY(-12px); border-color: var(--ocean-blue); }
+        .nav-card h2 { font-size: 34px; font-weight: 900; }
 
-        .back-btn { 
-            background: var(--deep-navy); color: white; border: none; padding: 12px 30px; 
-            border-radius: 50px; cursor: pointer; font-weight: 800; margin-bottom: 30px;
-        }
+        .back-btn { background: var(--deep-navy); color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: 800; margin-bottom: 30px; }
 
-        .resource-item {
-            background: white; padding: 25px; margin: 15px 0; border-radius: 20px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .download-link { background: var(--vivid-orange); color: white; padding: 10px 20px; border-radius: 12px; text-decoration: none; font-weight: 800; }
+        .resource-item { background: white; padding: 20px; margin: 10px 0; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .download-link { background: var(--vivid-orange); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 800; }
 
-        /* AI CHAT */
+        /* --- SMART CHATBOX --- */
         .chat-bubble {
             position: fixed; bottom: 30px; right: 30px; width: 75px; height: 75px;
-            background: var(--ocean-blue); border-radius: 50%; cursor: pointer;
-            display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0, 150, 255, 0.3); z-index: 1400;
+            background: var(--vivid-orange); border-radius: 50%; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; z-index: 1500; box-shadow: 0 10px 25px rgba(255, 152, 0, 0.3);
         }
+        #chat-widget {
+            position: fixed; bottom: 115px; right: 30px; width: 340px; background: white; 
+            border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; z-index: 1600;
+        }
+        .chat-header { background: var(--ocean-blue); color: white; padding: 18px; font-weight: 800; display: flex; justify-content: space-between; }
+        #ai-logs { height: 280px; padding: 20px; overflow-y: auto; background: #f9f9f9; font-size: 14px; line-height: 1.5; }
 
         footer { background: var(--deep-navy); color: white; padding: 50px 8%; text-align: center; margin-top: 80px; }
-        .contact-info { margin-top: 15px; font-weight: 400; opacity: 0.8; font-size: 15px; }
     </style>
 </head>
 <body>
 
 <div class="announcement-bar" id="top-announcement">
-    <div class="scrolling-text">
-        ⚡ NEW: 2026 March Model Papers are Live! | A/L ICT Past Papers 2011-2015 updated | Contact for Student Support.
-    </div>
+    <div class="scrolling-text">📢 LATEST: 2026 Model Papers and ER Diagram Lessons are now available for A/L Students!</div>
 </div>
 
 <img src="smurf1.png" id="bg1" class="smurf-bg">
 <img src="smurf2.png" id="bg2" class="smurf-bg">
 <img src="smurf3.png" id="bg3" class="smurf-bg">
 
-<header>
-    <div class="logo-main">ICT <span>ELITE</span></div>
-</header>
+<header><div class="logo-main">ICT <span>ELITE</span></div></header>
 
 <div class="container">
-
     <div id="step-level" class="view active">
-        <h1 style="font-size: 45px; font-weight: 900;">WELCOME TO THE ELITE</h1>
-        <p style="margin-bottom: 40px; font-size: 18px; opacity: 0.7;">Select your exam path to access resources</p>
+        <h1 style="font-size: 40px; font-weight: 900;">STUDENT PORTAL</h1>
         <div class="btn-grid">
             <div class="nav-card" onclick="goToYears('A/L')"><h2>A/L</h2><p>Advanced Level</p></div>
             <div class="nav-card" onclick="goToYears('O/L')"><h2>O/L</h2><p>Ordinary Level</p></div>
@@ -126,8 +103,8 @@
     </div>
 
     <div id="step-year" class="view">
-        <button class="back-btn" onclick="backToLevels()">← BACK</button>
-        <h1 id="year-title" style="font-size: 40px;">Select Year</h1>
+        <button class="back-btn" onclick="backHome()">← BACK</button>
+        <h1 id="year-title">Select Year</h1>
         <div class="btn-grid">
             <div class="nav-card" onclick="goToResources('2026')"><h2>2026</h2></div>
             <div class="nav-card" onclick="goToResources('2027')"><h2>2027</h2></div>
@@ -137,86 +114,98 @@
 
     <div id="step-type" class="view">
         <button class="back-btn" onclick="showStep('step-year')">← BACK</button>
-        <h1 id="type-title" style="font-size: 40px;">Resources</h1>
+        <h1 id="type-title">Categories</h1>
         <div class="btn-grid">
-            <div class="nav-card" onclick="showFiles('Past Papers')"><img src="past paper.png"><h2>Past Papers</h2></div>
-            <div class="nav-card" onclick="showFiles('Model Papers')"><img src="model paper.png"><h2>Model Papers</h2></div>
-            <div class="nav-card" onclick="showFiles('Progress')"><img src="progress report.png"><h2>Progress</h2></div>
+            <div class="nav-card" onclick="showFiles('Past Papers')"><h2>Past Papers</h2></div>
+            <div class="nav-card" onclick="showFiles('Model Papers')"><h2>Model Papers</h2></div>
+            <div class="nav-card" onclick="showFiles('Progress')"><h2>Progress</h2></div>
         </div>
     </div>
 
     <div id="step-files" class="view">
         <button class="back-btn" onclick="showStep('step-type')">← BACK</button>
-        <h1 id="files-title" style="font-size: 40px;">Files</h1>
+        <h1 id="files-title">Resources</h1>
         <div id="file-list" style="max-width: 700px; margin: 30px auto;"></div>
     </div>
-
 </div>
 
-<div class="chat-bubble" onclick="alert('AI Assistant is checking the syllabus...')">
-    <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" width="35" style="filter:invert(1)">
+<div class="chat-bubble" onclick="toggleChat()"><img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" width="35" style="filter:invert(1)"></div>
+<div id="chat-widget">
+    <div class="chat-header"><span>Syllabus Assistant</span><span onclick="toggleChat()" style="cursor:pointer">&times;</span></div>
+    <div id="ai-logs"><p><b>AI:</b> Hello! Ask me about Past Papers, ER Diagrams, or the Syllabus.</p></div>
+    <div style="display:flex; border-top:1px solid #eee;">
+        <input type="text" id="ai-input" style="flex:1; border:none; padding:15px; outline:none;" placeholder="Type here...">
+        <button onclick="askAI()" style="background:var(--ocean-blue); color:white; border:none; padding:15px; font-weight:800;">ASK</button>
+    </div>
 </div>
 
 <footer>
-    <div style="font-size: 24px; font-weight: 900; color: var(--vivid-orange);">ICT ELITE 2026</div>
-    <div class="contact-info">
-        📞 +94 779 178 732<br>
-        📧 annejayakody07@gmail.com<br><br>
-        <span style="opacity: 0.5;">Resource Management Portal | All Rights Reserved</span>
-    </div>
+    <div style="font-size: 26px; font-weight: 900; color: var(--vivid-orange);">ICT ELITE 2026</div>
+    <p>📞 0779178732 | 📧 annejayakody07@gmail.com</p>
+    <p style="opacity: 0.5; font-size: 13px;">Created for Bolawalana Ave Maria Convent Students</p>
 </footer>
 
 <script>
-    let currentLevel = "";
-    let currentYear = "";
+    let currentL = ""; let currentY = "";
 
     function showStep(id) {
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0,0);
     }
 
-    // NEW LOGIC: Show Announcement only after choosing Level
-    function goToYears(level) {
-        currentLevel = level;
+    function goToYears(l) { 
+        currentL = l; 
         document.getElementById('top-announcement').style.display = 'block';
-        document.getElementById('year-title').innerText = level + " | Choice of Year";
-        showStep('step-year');
+        document.getElementById('year-title').innerText = l + " | Selection";
+        showStep('step-year'); 
     }
 
-    function backToLevels() {
-        document.getElementById('top-announcement').style.display = 'none';
-        showStep('step-level');
-    }
+    function backHome() { document.getElementById('top-announcement').style.display = 'none'; showStep('step-level'); }
 
-    function goToResources(year) {
-        currentYear = year;
-        document.getElementById('type-title').innerText = currentLevel + " " + year;
-        showStep('step-type');
-    }
+    function goToResources(y) { currentY = y; document.getElementById('type-title').innerText = currentL + " " + y; showStep('step-type'); }
 
     function showFiles(type) {
-        document.getElementById('files-title').innerText = currentLevel + " " + currentYear + " " + type;
-        const container = document.getElementById('file-list');
-        container.innerHTML = "";
-
-        if(currentLevel === "A/L" && currentYear === "2026") {
+        document.getElementById('files-title').innerText = currentL + " " + currentY + " " + type;
+        const list = document.getElementById('file-list');
+        list.innerHTML = "";
+        if(currentL === "A/L" && currentY === "2026") {
             if(type === "Past Papers") {
                 ["2011", "2012", "2013", "2014", "2015"].forEach(p => {
-                    container.innerHTML += `<div class="resource-item"><span>${p} Exam Paper</span><a href="${p}.pdf" target="_blank" class="download-link">VIEW</a></div>`;
+                    list.innerHTML += `<div class="resource-item"><span>${p} Past Paper</span><a href="${p}.pdf" target="_blank" class="download-link">VIEW</a></div>`;
                 });
             } else if(type === "Model Papers") {
-                container.innerHTML += `<div class="resource-item"><span>March Model Paper</span><a href="model paper.pdf" target="_blank" class="download-link">VIEW</a></div>`;
-                container.innerHTML += `<div class="resource-item"><span>ER Diagram Analysis</span><a href="er model paper.pdf" target="_blank" class="download-link">VIEW</a></div>`;
-            } else {
-                container.innerHTML = `<div class="nav-card"><h3>Elite Status Active</h3><p>Your progress is being tracked.</p></div>`;
-            }
-        } else {
-            container.innerHTML = `<div style="background:white; padding:40px; border-radius:30px;"><h3>Processing...</h3><p>Resources for ${currentYear} are being prepared.</p></div>`;
-        }
+                list.innerHTML += `<div class="resource-item"><span>March Model Paper</span><a href="model paper.pdf" target="_blank" class="download-link">VIEW</a></div>`;
+                list.innerHTML += `<div class="resource-item"><span>ER Diagram Lesson</span><a href="er model paper.pdf" target="_blank" class="download-link">VIEW</a></div>`;
+            } else { list.innerHTML = "<h3>Status: ELITE ACTIVE</h3>"; }
+        } else { list.innerHTML = "<h3>Coming Soon for " + currentY + "</h3>"; }
         showStep('step-files');
     }
-</script>
 
+    function toggleChat() { 
+        const w = document.getElementById('chat-widget');
+        w.style.display = (w.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function askAI() {
+        const input = document.getElementById('ai-input');
+        const logs = document.getElementById('ai-logs');
+        const text = input.value.toLowerCase();
+        if(!text) return;
+
+        logs.innerHTML += `<p style="text-align:right"><b>Me:</b> ${input.value}</p>`;
+        
+        let response = "I'm not sure about that. Try asking about 'Papers' or 'Syllabus'!";
+        if(text.includes("paper")) response = "You can find Past Papers (2011-2015) and Model Papers in the A/L 2026 section of this portal!";
+        if(text.includes("er") || text.includes("diagram")) response = "The ER Diagram model paper is available under 'Model Papers' for A/L 2026.";
+        if(text.includes("syllabus")) response = "The 2026 ICT Syllabus focuses heavily on Database Systems and Networking. Check the model papers for practice!";
+
+        setTimeout(() => {
+            logs.innerHTML += `<p><b>AI:</b> ${response}</p>`;
+            logs.scrollTop = logs.scrollHeight;
+        }, 600);
+        input.value = "";
+    }
+</script>
 </body>
 </html>
